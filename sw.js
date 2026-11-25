@@ -1,6 +1,6 @@
 // Sayback Island – spanyol – service worker
-// Spanyol V1
-const CACHE = 'spanyolsziget-v1-1';
+// Spanyol V3
+const CACHE = 'spanyolsziget-v3-1';
 const SUPABASE_JS = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
@@ -61,7 +61,7 @@ self.addEventListener('push', e => {
 self.addEventListener('notificationclick', e => {
   e.notification.close();
   const scope = self.registration.scope, url = new URL((e.notification.data && e.notification.data.url) || './?go=today', scope).href;
-  const mine = u => u.startsWith(scope) && (scope.includes('/angol/') || !u.includes('/angol/'));
+  const mine = u => u.startsWith(scope) && (scope.includes('/nemet/') || !u.includes('/nemet/'));
   e.waitUntil((async () => {
     const all = await clients.matchAll({ type: 'window', includeUncontrolled: true });
     for (const c of all) if (mine(c.url) && 'focus' in c) { await c.focus(); try { c.postMessage({ type: 'go-today' }); } catch {} return; }
