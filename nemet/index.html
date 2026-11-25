@@ -220,6 +220,22 @@ details.help h4{margin:12px 0 4px;font-size:1rem}details.help ol,details.help ul
 .tabs button.sec[aria-selected="true"]{background:linear-gradient(135deg,var(--coral),#ff9f5a);border-color:transparent}
 @media (max-width:600px){.tabs{grid-template-columns:repeat(4,1fr);gap:7px;padding:8px}.tabs button.main{grid-column:span 2;padding:12px 6px 9px}.tabs button.main .ti{font-size:1.5rem}.tabs button.main .tl{font-size:.86rem}.tabs button.main .ts{font-size:.66rem}.tabs button.sec{padding:7px 3px;gap:3px}.tabs button.sec .ti{font-size:.95rem}.tabs button.sec .tl{font-size:.6rem;letter-spacing:0;white-space:normal;line-height:1.05;text-align:center}}
 #quickMode select,#quickMode input{width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5df;border-radius:10px;font-size:1rem}
+#ratingArea .rate.suggest{outline:3px solid #ffb02e;outline-offset:2px;position:relative}
+#ratingArea .rate.suggest::after{content:"javasolt";position:absolute;top:-10px;right:-6px;background:#ffb02e;color:#3b2600;font-size:.62rem;font-weight:800;padding:1px 6px;border-radius:8px}
+.dr-sum{background:#f4f9fb;border:1px solid #d7e6ee;border-radius:12px;padding:10px 12px;margin:0 0 10px}
+/* V53: nagy lejátszó az Ascolta fülön */
+#bigPlayer{margin:10px 0 8px;padding:14px 12px 8px;border-radius:18px;background:#f2f8fa;border:1px solid #d6e6ec}
+#bigPlayer .bp-row{display:flex;align-items:center;justify-content:center;gap:22px}
+#bigPlayer .bp-main{width:96px;height:96px;border-radius:50%;font-size:2.6rem;line-height:1;padding:0;margin:0;background:linear-gradient(135deg,var(--coral),#ff9f5a);box-shadow:0 6px 16px rgba(255,120,80,.35)}
+#bigPlayer .bp-side{width:68px;height:68px;border-radius:50%;font-size:1.6rem;line-height:1;padding:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;color:#0e5470;border:2px solid #cfe1e8;box-shadow:none}
+#bigPlayer .bp-side small{font-size:.62rem;font-weight:700;margin-top:2px}
+#bpSeek{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;margin:12px 0 0}
+#bpSeek::-webkit-slider-runnable-track{height:10px;border-radius:6px;background:linear-gradient(90deg,var(--coral) var(--p,0%),#d3e2e8 var(--p,0%))}
+#bpSeek::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;border:3px solid var(--coral);margin-top:-9px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+#bpSeek::-moz-range-track{height:10px;border-radius:6px;background:#d3e2e8}
+#bpSeek::-moz-range-progress{height:10px;border-radius:6px;background:var(--coral)}
+#bpSeek::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--coral)}
+#bigPlayer .bp-time{display:flex;justify-content:space-between;font-size:.9rem;color:#52606d;font-variant-numeric:tabular-nums}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -227,7 +243,7 @@ details.help h4{margin:12px 0 4px;font-size:1rem}details.help ol,details.help ul
 <header class="hero">
  <div class="brand"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffcf6b"/><stop offset="1" stop-color="#ff7a59"/></linearGradient><linearGradient id="lgW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3fd0c9"/><stop offset="1" stop-color="#127f8c"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#0e4a6b"/><circle cx="40" cy="24" r="11" fill="url(#lgS)"/><path d="M0 46c8-4 16-4 24 0s16 4 24 0 12-3 16-1v19H0z" fill="url(#lgW)"/><ellipse cx="25" cy="46" rx="15" ry="4.5" fill="#f6d9a0"/><path d="M24 45c0-9 1-15 5-21" stroke="#6b4423" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M29 24c-6-4-12-3-15 1 5-1 9 0 15-1zm0 0c2-6 7-8 12-7-4 2-7 4-12 7zm0 0c6-2 11 0 13 4-5-2-9-2-13-4zm0 0c-3-5-8-6-11-5 4 1 7 2 11 5z" fill="#2fbf71"/><path d="M8 10h17a5 5 0 0 1 5 5v5a5 5 0 0 1-5 5h-9l-5 4v-4H8a5 5 0 0 1-5-5v-5a5 5 0 0 1 5-5z" fill="#fff"/><path d="M11 18a5.5 5.5 0 1 0 2-4.3" stroke="#ff7a59" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M11 11.5v3.6h3.6" stroke="#ff7a59" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="bname">Sayback <span>Island</span></div><div class="blang"><b>DE</b> Deutsch</div></div></div>
  <div class="hchips"><span class="hchip" id="hStreak" title="Napos sorozat">🔥 0 nap</span><span class="hchip" id="hGoal" title="Mai cél">🎯 0/50</span></div>
- <span class="ver" title="Programverzió">DE V1</span>
+ <span class="ver" title="Programverzió">DE V3</span>
 </header>
 <nav class="tabs" id="tabs" role="tablist" aria-label="Menü">
  <button type="button" role="tab" data-tab="terv" class="plantab" title="a napi terv"><i class="ti">🗺️</i><span class="tl">DER PLAN</span><span class="ts" id="tbPlan">a mai terv</span></button>
@@ -343,7 +359,7 @@ details.help h4{margin:12px 0 4px;font-size:1rem}details.help ol,details.help ul
 </section>
 
 <section data-tab="beallitas" class="box helpbox"><details class="help"><summary>Használati útmutató – mi ez, miért hasznos, milyen sorrendben</summary><p class="help-why"><b>Mi ez?</b> Bejelentkezés és felhőmentés, a gyakorlás beállításai, a beszédfelismerés próbája és a mentés. <b>Miért?</b> Itt dől el, hogyan kérdez az app – ezeket egyszer kell jól beállítani.</p>
-<h4>Ajánlott beállítások</h4><ul><li><b>Mód:</b> „Esedékes ismétlés + új mondatok” a napi munkához; „Tanulás” csak egy sziget első átnézéséhez.</li><li><b>„Bevéséses tanulás”:</b> mint az előző, de minden <b>új</b> mondatot 3 rövid lépésben vésel be (hallás + árnyékolás → kezdőbetűkkel → fejből, ha kéred: leírás), 3 új mondatonként rövid körkérdezés jön, a végén pedig záró kör a mai összes új mondatból. Ami a körben nem megy, egy gombbal a 📌 Bevésésbe teheted. Lassabb, de sokkal több marad meg – akkor használd, ha az új mondatok nem ragadnak meg.</li><li><b>Irány:</b> magyar → idegen (ez fejleszti a beszédet). Hetente egyszer a fordított irány a megértéshez.</li><li><b>Új mondat naponta:</b> amennyit a 🗺️ terv javasol. Ha túl sok az ismétlés, csökkentsd.</li><li><b>Idegen hang sebessége:</b> eleinte 80–90%, később 100%.</li><li><b>Gépelős mód / diktálás:</b> hetente 1–2× a helyesíráshoz és a hallásértéshez.</li></ul>
+<h4>Ajánlott beállítások</h4><ul><li><b>Mód:</b> „Esedékes ismétlés + új mondatok” a napi munkához; „Tanulás” csak egy sziget első átnézéséhez.</li><li><b>Okos ismétlés:</b> az app figyeli, milyen gyorsan jut eszedbe a mondat (a „Felfedem” gomb megnyomásáig), és a mondat hosszát is: ami gyorsan megy, kicsit később jön vissza, ami lassan, kicsit hamarabb; a hosszú mondatok lassabban távolodnak. A „Nehéz” csak óvatosabb ütemezést jelent, a „Nem ment” felejtés – utána nem a nulláról, hanem a korábbi köz negyedéről indul újra. Ha egy mondat sokszor nem megy (makacs mondat), magától átkerül a 📌 Bevésésbe, és a 🎯 Focusban 🔁 jellel látod.</li><li><b>„Bevéséses tanulás”:</b> mint az előző, de minden <b>új</b> mondatot 3 rövid lépésben vésel be (hallás + árnyékolás → kezdőbetűkkel → fejből, ha kéred: leírás), a végén még egyszer <b>kimondod vagy leírod</b>, az app összeveti, és csak utána értékelsz, 3 új mondatonként rövid körkérdezés jön, a végén pedig záró kör a mai összes új mondatból. Ami a körben nem megy, egy gombbal a 📌 Bevésésbe teheted. Lassabb, de sokkal több marad meg – akkor használd, ha az új mondatok nem ragadnak meg.</li><li><b>Irány:</b> magyar → idegen (ez fejleszti a beszédet). Hetente egyszer a fordított irány a megértéshez.</li><li><b>Új mondat naponta:</b> amennyit a 🗺️ terv javasol. Ha túl sok az ismétlés, csökkentsd.</li><li><b>Idegen hang sebessége:</b> eleinte 80–90%, később 100%.</li><li><b>Gépelős mód / diktálás:</b> hetente 1–2× a helyesíráshoz és a hallásértéshez.</li></ul>
 <h4>Biztonság</h4><ul><li>Jelentkezz be, hogy a haladás a felhőbe is mentődjön.</li><li>Havonta egyszer: „Haladás exportálása” (tartalék JSON-fájl).</li></ul></details></section>
 <section data-tab="beallitas" class="box"><h3>Felhőszinkronizálás</h3>
  <p class="muted">Jelentkezz be ugyanazzal az e-mail-címmel a számítógépen és az iPhone-on.</p>
@@ -393,7 +409,7 @@ details.help h4{margin:12px 0 4px;font-size:1rem}details.help ol,details.help ul
  </div>
  <div class="row">
   <label>Bip a szünetben (figyelmeztet, hogy jön a válasz)<br><select id="mixBip" class="move" style="margin:0;width:100%"><option value="off">nincs bip</option><option value="0.05">a szünet elején – „te jössz”</option><option value="0.65" selected>a szünet 65%-ánál (mint a Sayback-programban)</option><option value="end1">1 mp-cel a válasz előtt</option></select></label>
-  <label>Hullámzás a német mondatnál (fülhallgatóval)<br><select id="mixWave" class="move" style="margin:0;width:100%"><option value="off">nincs</option><option value="0.5">enyhe</option><option value="0.82" selected>normál (mint a Sayback-programban)</option><option value="strong">erős: bal–jobb oda-vissza</option></select></label>
+  <label>Hullámzás a német mondatnál (fülhallgatóval)<br><select id="mixWave" class="move" style="margin:0;width:100%"><option value="off">nincs</option><option value="0.5">enyhe</option><option value="0.82" selected>normál (mint a Sayback-programban)</option><option value="strong">erős: bal–jobb oda-vissza</option><option value="random">🎲 kiszámíthatatlan: mindig máshol és máskor mozdul</option></select></label>
  </div>
  <div class="row">
   <label>Magyar hang sebessége: <strong id="mixHuVal">100%</strong><br><input id="mixHu" type="range" min="0.6" max="1.3" step="0.05" value="1"></label>
@@ -403,8 +419,12 @@ details.help h4{margin:12px 0 4px;font-size:1rem}details.help ol,details.help ul
  <p id="mixStatus" class="muted"></p>
  <div id="mixOut" class="hidden">
   <div id="mixTitle" style="font-weight:600;margin:6px 0 2px"></div>
-  <audio id="mixAudio" controls preload="auto" style="width:100%"></audio>
-  <div class="center" style="margin:4px 0"><button class="alt" id="mixBack15">⟲ 15 mp</button><button class="alt" id="mixFwd15">15 mp ⟳</button></div>
+  <audio id="mixAudio" preload="auto"></audio>
+  <div id="bigPlayer">
+   <div class="bp-row"><button type="button" class="bp-side" id="mixBack15" aria-label="Vissza 15 másodpercet">⟲<small>15 mp</small></button><button type="button" class="bp-main" id="bpPlay" aria-label="Lejátszás">▶</button><button type="button" class="bp-side" id="mixFwd15" aria-label="Előre 15 másodpercet">⟳<small>15 mp</small></button></div>
+   <input type="range" id="bpSeek" min="0" max="1000" step="1" value="0" aria-label="Hol tart a hanganyag">
+   <div class="bp-time"><span id="bpCur">0:00</span><span id="bpDur">0:00</span></div>
+  </div>
   <div><button id="mixDownload" class="alt">MP3 letöltése</button><button id="mixShare" class="alt hidden">Megosztás / mentés a Fájlokba</button><span id="mixInfo" class="muted"></span></div>
  </div>
  <div id="mixSaved" class="hidden" style="margin-top:12px">
@@ -583,6 +603,7 @@ details.help h4{margin:12px 0 4px;font-size:1rem}details.help ol,details.help ul
 <h4>Új sziget</h4><ol><li>A Claude-tól kapott TXT-ből a Python-program elkészíti a hangfájlokat.</li><li>„Új sziget feltöltése”: név, <b>mappa</b> (a 🗺️ terv mutatja, melyik a következő és melyik mappába való), TXT, magyar és idegen nyelvű hangfájlok.</li></ol>
 <h4>Szigetcsoport egyszerre</h4><ol><li>A gépen az <b>ssa_szigetcsoport.py</b> egy csoportfájlból (pl. 8 bekezdés) 8 sziget-mappát készít az <b>output</b> mappába.</li><li>Itt: „Szigetcsoport feltöltése egyszerre” → válaszd ki a csoport mappáját (telefonon: a ZIP-et) → „Szigetcsoport feltöltése”. A szigetek nevet és mappát is kapnak, a tananyag-tervben a csoportjukhoz számítanak.</li><li>Egyenként továbbra is feltölthetsz az „Új sziget feltöltése” résznél.</li></ol>
 <h4>Rendezés – két nézet</h4><ol><li><b>📊 Szint és haladás szerint (automatikus):</b> az app magától sorolja be a szigeteket: <b>szint</b> (A1…C2) → <b>haladás</b> (🟡 elkezdett · 🔁 végigvett, ismétlés alatt · ⬜ még nem gyakorolt · ✅ rögzült = a mondatok legalább 80%-a már 3 hétnél ritkábban jön) → <b>témacsoport</b>. Ahogy tanulsz, a sziget magától átkerül a következő csoportba – nem kell kézzel rendezni.</li><li><b>📁 Saját mappáim:</b> a magad által készített mappák, akárhány szint mélyen (<b>+ Almappa</b>). A mappák is áthelyezhetők másik mappába („↪ Mappa áthelyezése…”), a szigetek a sorukban lévő választóval. Mappa törlésekor semmi nem vész el: a tartalma egy szinttel feljebb kerül.</li><li>A haladás és a hangok nem függnek a mappáktól – a besorolás bármikor szabadon változtatható.</li></ol>
+<h4>🔁 Már gyakorolt sziget újra</h4><ol><li>A már gyakorolt szigeteknél a <b>„🔁 Gyakorlás”</b> gombbal bármikor újra végigveheted a mondatokat, értékeléssel.</li><li>Ez <b>nem módosítja az ismétlési rendet</b>: a következő ismétlések időpontja ugyanaz marad, és a napi célba sem számít bele.</li><li>A kör végén a „nem ment” mondatokat egy gombbal a 📌 Bevésésbe teheted.</li><li>Ha a „Megnyitás” gombra egy olyan szigetnél kattintasz, amelyben most nincs esedékes ismétlés és új mondat, az app magától ismétlő gyakorlásként nyitja meg.</li></ol>
 <h4>Gyakorlás</h4><ol><li>Koppints egy szigetre: a ⚙️ fülön beállított móddal indul (ajánlott: „Esedékes ismétlés + új mondatok”).</li><li>Utazás előtt: <b>„Összes letöltése offline használatra”</b>.</li></ol></details></section>
 <section data-tab="konyvtar" class="box"><h3>Nyelvi sziget-könyvtár (felhő)</h3>
  <div class="row" id="quickMode"><label>Tanulási mód – ezzel nyílnak meg a szigetek<br><select id="modeQ"></select></label><label style="max-width:150px">Új mondat naponta<br><input id="newLimitQ" type="number" min="0" max="100"></label></div>
@@ -633,7 +654,7 @@ details.help h4{margin:12px 0 4px;font-size:1rem}details.help ol,details.help ul
  <div class="row"><label>Magyar hang sebessége: <strong id="l1Val">100%</strong><br><input id="l1Speed" type="range" min="0.6" max="1.25" step="0.05" value="1"></label><label>Német hang sebessége: <strong id="l2Val">80%</strong><br><input id="l2Speed" type="range" min="0.6" max="1.25" step="0.05" value="0.8"></label></div>
  <div class="row">
   <label>Irány<br><select id="dir"><option value="hu-it">Magyar → német</option><option value="it-hu">Német → magyar</option><option value="mix">Vegyes</option></select></label>
-  <label>Mód<br><select id="mode"><option value="learn">Tanulás – szabad gyakorlás</option><option value="all">Összes mondat (értékeléssel)</option><option value="due">Esedékes ismétlés + új mondatok</option><option value="drill">Bevéséses tanulás – esedékes + új mondatok lépésenként, körkérdezéssel</option></select></label>
+  <label>Mód<br><select id="mode"><option value="learn">Tanulás – szabad gyakorlás</option><option value="all">Összes mondat (értékeléssel)</option><option value="due">Esedékes ismétlés + új mondatok</option><option value="drill">Bevéséses tanulás – esedékes + új mondatok lépésenként, körkérdezéssel</option><option value="practice">🔁 Ismétlő gyakorlás – értékeléssel, de az ismétlési rendet NEM módosítja</option></select></label>
   <label class="muted"><input type="checkbox" id="drillWrite"> Bevéséses tanulásnál az új mondatot le is írom</label>
   <label>Új mondat naponta<br><input id="newLimit" type="number" min="0" max="100" value="10" style="width:90px;padding:8px"></label>
  </div>
@@ -875,6 +896,7 @@ function isHard(c) {
   if (!c || !c.reps || (Number(c.hardDismissedAt) || 0) > (Number(c.lastReviewed) || 0)) return false;
   if (c.last === 'again') return true;
   const h = (c.hist || '').slice(-4);
+  if (isLeech(c) && !/[ge]{3}$/.test(c.hist || '')) return true; // makacs mondat: csak 3 egymás utáni jó után kerül le
   if (/[ge]{2}$/.test(h)) return false; // két egymás utáni „Jól ment / Könnyű” után lekerül a listáról
   return (h.match(/[ah]/g) || []).length >= 2;
 }
@@ -882,30 +904,54 @@ function isHard(c) {
 // ============================================================
 // ÜTEMEZÉS – SM-2 jellegű, mondatonkénti nehézségi értékkel (ease)
 // ============================================================
-function schedule(old, v, now) {
+// V51 finomítások (a régi adatokkal kompatibilisen, csak a következő értékeléstől hatnak):
+//  1) gyorsaság: a felfedésig eltelt idő a mondat hosszához mérve (gyors → kicsit hosszabb, lassú → rövidebb köz)
+//  2) „Nehéz” ≠ „Nem ment”: a felejtés (lapse) után a régi köz negyedéről indul újra, nem a nulláról
+//  3) számlálók: hányszor nem ment / volt nehéz / kellett a körben újra elővenni
+//  4) hossz: a hosszú mondatok lassabban, a nagyon rövidek gyorsabban távolodnak
+//  5) visszatérő hiba („makacs mondat”): célzott gyakorlás a 📌 Bevésésben + kiemelés a 🎯 Focusban
+const wordCount = t => String(t || '').trim().split(/\s+/).filter(w => /[\p{L}\d]/u.test(w)).length;
+function lenFactor(W) { return W >= 13 ? 0.85 : W >= 9 ? 0.92 : W && W <= 4 ? 1.1 : 1; }
+function speedClass(rt, W) {
+  if (!rt || rt < 0.4 || rt > 60) return '';
+  const exp = 2.5 + 0.45 * Math.max(1, W || 6);
+  return rt < exp * 0.5 ? 'fast' : rt > exp * 2 ? 'slow' : '';
+}
+function isLeech(c) { return !!c && ((c.lapses || 0) >= 3 || (c.againN || 0) >= 4); }
+function schedule(old, v, now, ctx = {}) {
   const c = { ease: 2.5, interval: 0, reps: 0, lapses: 0, hist: '', ...(old || {}) };
   const learning = (Number(c.interval) || 0) < 1;
+  const W = wordCount(c.it || ctx.it), sp = (v === 'good' || v === 'easy') ? speedClass(ctx.rt, W) : '';
   let requeue = 0;
   if (v === 'again') {
-    if (c.reps > 0 && !learning) c.lapses = (c.lapses || 0) + 1;
-    c.ease = Math.max(1.3, c.ease - 0.2); c.interval = 0; c.due = now + 60e3; requeue = 3;
+    if (c.reps > 0 && !learning) { c.lapses = (c.lapses || 0) + 1; c.relearnTo = Math.max(1, Math.round((Number(c.interval) || 0) * 0.25)); }
+    c.ease = Math.max(1.3, c.ease - 0.2); c.interval = 0; c.due = now + 60e3; requeue = W >= 9 ? 2 : 3;
+    c.againN = (c.againN || 0) + 1; c.requeueN = (c.requeueN || 0) + 1;
   } else if (v === 'hard') {
+    c.hardN = (c.hardN || 0) + 1; if (learning) c.requeueN = (c.requeueN || 0) + 1;
     c.ease = Math.max(1.3, c.ease - 0.15);
     if (learning) { c.interval = 0; c.due = now + 10 * 60e3; requeue = 5; }
     else { c.interval = Math.max(c.interval + 1, Math.round(c.interval * 1.2)); c.due = dueAfterDays(c.interval, now); }
-  } else if (v === 'good') {
-    c.interval = goodInterval(c, learning);
-    c.due = dueAfterDays(c.interval, now);
-  } else if (v === 'easy') {
-    const g = goodInterval(c, learning);
-    c.ease = c.ease + 0.15;
-    c.interval = learning ? 4 : Math.max(g + 2, Math.round(c.interval * c.ease * 1.3));
-    c.due = dueAfterDays(c.interval, now);
+  } else if (v === 'good' || v === 'easy') {
+    const prev = Number(c.interval) || 0;
+    let iv;
+    if (learning && c.relearnTo > 1) { iv = v === 'easy' ? Math.round(c.relearnTo * 1.5) : c.relearnTo; }
+    else if (v === 'good') iv = goodInterval(c, learning);
+    else { const g = goodInterval(c, learning); c.ease = c.ease + 0.15; iv = learning ? 4 : Math.max(g + 2, Math.round(c.interval * c.ease * 1.3)); }
+    if (learning) delete c.relearnTo;
+    if (!learning && prev >= 3) {
+      const f = lenFactor(W) * (sp === 'fast' ? 1.15 : sp === 'slow' ? 0.85 : 1);
+      iv = Math.max(prev + 1, Math.round(iv * f));
+    }
+    if (sp === 'fast') c.ease = Math.min(3.2, c.ease + 0.03);
+    if (sp === 'slow') c.ease = Math.max(1.3, c.ease - 0.05);
+    c.interval = iv; c.due = dueAfterDays(c.interval, now);
   }
+  if (ctx.rt && ctx.rt >= 0.4 && ctx.rt <= 60) { const r = Math.round(ctx.rt * 10) / 10; c.rt = r; c.rtAvg = c.rtAvg ? Math.round((c.rtAvg * 0.7 + r * 0.3) * 10) / 10 : r; }
   c.reps = (c.reps || 0) + 1; c.last = v; c.lastReviewed = now;
   c.hist = ((c.hist || '') + v[0]).slice(-5);
   c.ease = Math.round(c.ease * 100) / 100;
-  return { card: c, requeue };
+  return { card: c, requeue, speed: sp };
 }
 function goodInterval(c, learning) {
   if (learning) return 1;
@@ -1242,6 +1288,17 @@ function islandRow(slug) {
     }
   };
   actions.append(open);
+  if (st.seen > 0) {
+    const pr = document.createElement('button'); pr.className = 'alt'; pr.textContent = '🔁 Gyakorlás';
+    pr.title = 'Újra végigveheted értékeléssel – az ismétlési rendet nem módosítja';
+    pr.onclick = async () => {
+      pr.disabled = true;
+      try { await openIsland(slug); startSession('practice'); $('libStatus').textContent = 'Gyakorlás: ' + niceName(slug) + ' (az ismétlési rend nem változik).'; }
+      catch (e) { $('libStatus').textContent = 'Megnyitási hiba (' + niceName(slug) + '): ' + (e && e.message ? e.message : e); }
+      finally { pr.disabled = false; }
+    };
+    actions.append(pr);
+  }
   // Áthelyezés másik mappába
   const move = document.createElement('select'); move.className = 'move'; move.title = 'Áthelyezés mappába';
   fillFolderSelect(move, folderOf(slug));
@@ -1555,14 +1612,47 @@ function interleave(reviews, fresh) { // minden 3. ismétlés után egy új mond
   return out;
 }
 
+// Ismétlő gyakorlás: a már gyakorolt sziget bármikor újra végigvehető, értékeléssel,
+// de az értékelés semmit nem ír a kártyákba (a következő ismétlések időpontja marad), és a napi célba sem számít.
+function startPractice(slug, pairs, note) {
+  sess = { title: '🔁 ' + niceName(slug) + ' – gyakorlás', items: pairs.map(p => toItem(slug, p)), pos: 0, rated: true, single: null, practice: true, pst: { good: 0, hard: 0, again: 0 }, pBad: [] };
+  render();
+  $('status').textContent = (note || '') + '🔁 Ismétlő gyakorlás: értékelhetsz, de ez NEM módosítja az ismétlési rendet – a következő ismétlések időpontja ugyanaz marad.';
+  $('study').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function practiceRate(v) {
+  const it = sess.items[sess.pos];
+  if (!it.rep) sess.pst[v === 'easy' ? 'good' : v]++;
+  if (v === 'again') {
+    if (!sess.pBad.some(x => x.slug === it.slug && x.k === it.k)) sess.pBad.push(it);
+    sess.items.splice(Math.min(sess.items.length, sess.pos + 4), 0, { ...it, rep: true });
+  }
+  if (sess.pos >= sess.items.length - 1) return practiceEnd();
+  sess.pos++; render();
+  $('status').textContent = (v === 'again' ? 'Nem ment: pár mondat múlva újra előjön. ' : '') + '🔁 Gyakorlás – az ismétlési rend nem változik.';
+}
+function practiceEnd() {
+  const s = sess.pst, bad = sess.pBad.slice();
+  $('study').classList.add('hidden');
+  const st = $('status');
+  st.textContent = `🔁 A gyakorlás végére értél: ${s.good} jól ment, ${s.hard} nehéz, ${s.again} nem ment. Az ismétlési rend nem változott.`;
+  if (bad.length) {
+    const b = document.createElement('button'); b.className = 'alt'; b.id = 'practiceToBv';
+    b.textContent = `📌 A „nem ment” mondatok a Bevésésbe (${bad.length})`;
+    b.onclick = () => { let added = 0; try { added = bvAdd(bad.map(x => ({ slug: x.slug, n: x.n, hu: x.hu, it: x.it }))).added; } catch {} b.disabled = true; b.textContent = added ? `📌 ${added} mondat bekerült a Bevésésbe` : '📌 Ezek már a Bevésésben vannak'; };
+    st.append(document.createElement('br'), b);
+  }
+  sess = null;
+}
 function startSession(mode) {
   if (!current) return;
   const { slug, pairs } = current;
+  if (mode === 'practice') return startPractice(slug, pairs, '');
   if (mode === 'due' || mode === 'drill') {
     const { reviews, fresh } = dueItemsFor(slug, pairs, newLeftToday());
     if (mode === 'drill') fresh.forEach(f => { f.drill = true; f.dir = 'hu-it'; f.dstep = 0; });
     const items = interleave(reviews, fresh);
-    if (!items.length) { $('study').classList.add('hidden'); $('status').textContent = 'Ebben a szigetben most nincs esedékes ismétlés, és a mai új mondatok limitje elfogyott (vagy nincs több új mondat). Válaszd a „Tanulás” vagy az „Összes mondat” módot.'; return; }
+    if (!items.length) return startPractice(slug, pairs, 'Ebben a szigetben most nincs esedékes ismétlés és új mondat, ezért ismétlő gyakorlásként nyílt meg. ');
     sess = { title: niceName(slug), items, pos: 0, rated: true, single: null, drill: mode === 'drill', drilled: [], sinceKor: [] };
     $('status').textContent = `${reviews.length} esedékes ismétlés és ${fresh.length} új mondat.` + (mode === 'drill' && fresh.length ? ' Az új mondatokat lépésenként vésed be.' : '');
   } else {
@@ -1589,6 +1679,7 @@ function render() {
   $('study').classList.remove('hidden', 'parked');
   if (sess.drill) { const d = sess.items[sess.pos]; if (d.kor || (d.drill && !d.drillDone)) { $('count').textContent = `${sess.pos + 1} / ${sess.items.length}`; $('island').textContent = sess.title; resetRecording(); return drillRender(d); } }
   $('study').classList.remove('drilling'); $('drillBox').innerHTML = '';
+  document.querySelectorAll('#ratingArea .rate.suggest').forEach(b => b.classList.remove('suggest'));
   const it = sess.items[sess.pos];
   const dict = $('dictMode').checked;
   $('question').textContent = dict ? '🎧 Hallgasd meg, és írd le németül' : (it.dir === 'hu-it' ? it.hu : it.it);
@@ -1596,14 +1687,14 @@ function render() {
   { const mn = typeof brMnFor === 'function' ? brMnFor(it.hu, it.it) : ''; $('mnIsland').textContent = mn ? '🧠 ' + mn : ''; $('mnIsland').classList.toggle('hidden', !mn); }
   $('toVocabInfo').textContent = '';
   $('answrap').classList.add('hidden'); $('show').classList.remove('hidden');
+  sess.shownAt = Date.now(); sess.rtPos = -1; sess.rt = 0;
   $('ratingArea').classList.toggle('hidden', !sess.rated);
   $('hideAnswer').classList.toggle('hidden', sess.rated);
   $('shuffle').classList.toggle('hidden', !sess.single);
   $('count').textContent = `${sess.pos + 1} / ${sess.items.length} · ${it.n}. mondat` + (sess.single ? '' : ' · ' + niceName(it.slug));
   $('island').textContent = sess.title;
   if (sess.rated) {
-    const now = Date.now(), old = getProg(it.slug).cards[it.k];
-    document.querySelectorAll('[data-rate]').forEach(b => { b.querySelector('small').textContent = describeDue(schedule(old, b.dataset.rate, now).card, now); });
+    updateRateLabels();
   }
   resetRecording();
   resetTyping();
@@ -1744,6 +1835,7 @@ function advance() {
     return;
   }
 
+  if (sess.practice) return practiceEnd();
   // Szabad tanuló módban a kör végtelen: az utolsó mondat után
   // azonnal visszatérünk az elsőre, nem zárjuk be a gyakorlót.
   if (sess.single && !sess.rated) {
@@ -1766,9 +1858,10 @@ function advance() {
   renderStats(); loadDailyReview(); renderHard();
 }
 function rate(v) {
+  if (sess && sess.practice) return practiceRate(v);
   const it = sess.items[sess.pos], prog = getProg(it.slug), now = Date.now();
-  const old = prog.cards[it.k], wasNew = !old || !old.reps;
-  const { card, requeue } = schedule(old, v, now);
+  const old = prog.cards[it.k], wasNew = !old || !old.reps, wasLeech = isLeech(old);
+  const { card, requeue, speed } = schedule(old, v, now, rateCtx());
   Object.assign(card, { hu: it.hu, it: it.it, n: it.n, hardDismissedAt: now });
   if (v === 'again' || v === 'hard') card.hardDay = studyDay(now); // a mai hallgatható összeállításhoz
   if (wasNew && !card.firstDay) card.firstDay = studyDay(now); // az első tanulás napja: a „ma / tegnap tanult új mondatok” hanganyaghoz
@@ -1777,7 +1870,11 @@ function rate(v) {
   clearTimeout(rate.hardT); rate.hardT = setTimeout(renderHard, 400);
   recordRating(v, wasNew);
   if (requeue) sess.items.splice(Math.min(sess.items.length, sess.pos + 1 + requeue), 0, { ...it });
-  const msg = v === 'again' ? 'Nem ment: néhány mondat múlva újra előjön.' : v === 'hard' && card.interval < 1 ? 'Nehéz: hamarosan újra előjön.' : 'Következő ismétlés: ' + describeDue(card, now) + '.';
+  let msg = v === 'again' ? ((old && old.interval >= 1) ? `Nem ment: néhány mondat múlva újra előjön (utána ${card.relearnTo > 1 ? card.relearnTo + ' nap múlva' : 'holnap'} tér vissza).` : 'Nem ment: néhány mondat múlva újra előjön.') : v === 'hard' && card.interval < 1 ? 'Nehéz: hamarosan újra előjön.' : 'Következő ismétlés: ' + describeDue(card, now) + (speed === 'fast' ? ' (gyorsan ment – kicsit később jön újra)' : speed === 'slow' ? ' (lassan jött elő – kicsit hamarabb jön újra)' : '') + '.';
+  if (!wasLeech && isLeech(card)) {
+    let added = 0; try { added = bvAdd([{ slug: it.slug, n: it.n, hu: it.hu, it: it.it }]).added; } catch {}
+    msg = `🔁 Ez a mondat már ${Math.max(card.againN || 0, card.lapses || 0)}× nem ment – ` + (added ? 'átkerült a 📌 Bevésésbe célzott gyakorlásra (a szigetben is megmarad), és kiemelve látod a 🎯 Focusban.' : 'kiemelve látod a 🎯 Focusban; a 📌 Bevésésben már ott van.');
+  }
   advance();
   if (sess && !$('study').classList.contains('hidden')) $('status').textContent = msg;
 }
@@ -2097,8 +2194,8 @@ async function startDailyAll() {
 // ============================================================
 function hardItems() {
   const out = [];
-  for (const slug of allProgSlugs()) for (const [k, c] of Object.entries(getProg(slug).cards)) if (isHard(c)) out.push({ slug, k, hu: c.hu, it: c.it, n: c.n, ease: c.ease, lapses: c.lapses || 0 });
-  out.sort((a, b) => (a.ease - b.ease) || (b.lapses - a.lapses));
+  for (const slug of allProgSlugs()) for (const [k, c] of Object.entries(getProg(slug).cards)) if (isHard(c)) out.push({ slug, k, hu: c.hu, it: c.it, n: c.n, ease: c.ease, lapses: c.lapses || 0, againN: c.againN || 0, leech: isLeech(c) });
+  out.sort((a, b) => (b.leech - a.leech) || (a.ease - b.ease) || (b.lapses - a.lapses));
   return out;
 }
 function hardPracticeButton(label, items, title) {
@@ -2112,7 +2209,7 @@ function hardPracticeButton(label, items, title) {
 function hardRow(h) {
   const d = document.createElement('div'); d.className = 'hard';
   const a = document.createElement('div'); a.textContent = h.hu + ' – ' + h.it;
-  const b = document.createElement('div'); b.className = 'muted'; b.textContent = niceName(h.slug) + ' · ' + h.n + '. mondat';
+  const b = document.createElement('div'); b.className = 'muted'; b.textContent = (h.leech ? `🔁 makacs mondat (${Math.max(h.againN, h.lapses)}× nem ment) · ` : '') + niceName(h.slug) + ' · ' + h.n + '. mondat';
   const dismiss = document.createElement('button'); dismiss.className = 'alt'; dismiss.textContent = 'Eltávolítás a nehéz mondatokból';
   dismiss.onclick = () => {
     const prog = getProg(h.slug), card = prog.cards[h.k];
@@ -2164,7 +2261,7 @@ function renderHard() {
 // ============================================================
 // IL PIANO – cél, időbeosztás és napi terv
 // ============================================================
-/*CURR_START*/const CURRICULUM = [{"lv": "A1", "f": "A1 · Alapozó", "ready": true, "i": [{"c": "A01", "n": "Koszones es bemutatkozas", "s": 31}, {"c": "A02", "n": "Ha nem ertek", "s": 30}, {"c": "A03", "n": "En vagyok", "s": 30}, {"c": "A04", "n": "O mi ok", "s": 30}, {"c": "A05", "n": "Kerdesek", "s": 30}, {"c": "A06", "n": "Szamok", "s": 30}, {"c": "A07", "n": "Van nekem", "s": 30}, {"c": "A08", "n": "Akarok kernek", "s": 30}, {"c": "A09", "n": "Szeretem", "s": 30}, {"c": "A10", "n": "Tudok lehet", "s": 30}, {"c": "A11", "n": "Hol van", "s": 30}, {"c": "A12", "n": "Mindennapjaim", "s": 30}, {"c": "A13", "n": "Tagadas es kerdes", "s": 30}, {"c": "A14", "n": "O csinalja", "s": 30}, {"c": "A15", "n": "Ido es napszakok", "s": 30}, {"c": "A16", "n": "Napok es gyakorisag", "s": 30}, {"c": "A17", "n": "Etel es ital", "s": 30}, {"c": "A18", "n": "Vasarlas", "s": 30}, {"c": "A19", "n": "Csalad es otthon", "s": 30}, {"c": "A20", "n": "Allatok es kert", "s": 30}, {"c": "A21", "n": "Most csinalom", "s": 30}, {"c": "A22", "n": "Idojaras", "s": 30}, {"c": "A23", "n": "Iranyok es helyek", "s": 30}, {"c": "A24", "n": "Mult ido", "s": 30}, {"c": "A25", "n": "Jovo ido", "s": 31}]}, {"lv": "A2", "f": "A2 · 1. Hétköznapok", "ready": true, "i": [{"c": "A201", "n": "Bemutatkozás bővebben", "s": 35}, {"c": "A202", "n": "A napi rutinom", "s": 35}, {"c": "A203", "n": "A munkám", "s": 35}, {"c": "A204", "n": "A családom", "s": 35}, {"c": "A205", "n": "Az otthonom", "s": 35}, {"c": "A206", "n": "Hobbi és szabadidő", "s": 35}, {"c": "A207", "n": "A hétvégém (múlt idő)", "s": 35}, {"c": "A208", "n": "Ruhavásárlás", "s": 35}, {"c": "A209", "n": "Élelmiszerbolt és piac", "s": 35}, {"c": "A210", "n": "Étterem: foglalás, rendelés", "s": 35}, {"c": "A211", "n": "Kávézó és bár", "s": 35}, {"c": "A212", "n": "Szállásfoglalás", "s": 35}, {"c": "A213", "n": "A szállodában", "s": 35}, {"c": "A214", "n": "Útbaigazítás", "s": 35}, {"c": "A215", "n": "Tömegközlekedés", "s": 35}]}, {"lv": "A2", "f": "A2 · 2. Utazás és ügyintézés", "ready": true, "i": [{"c": "A216", "n": "A repülőtéren", "s": 35}, {"c": "A217", "n": "Autózás, benzinkút", "s": 35}, {"c": "A218", "n": "Orvosnál", "s": 35}, {"c": "A219", "n": "Gyógyszertárban", "s": 35}, {"c": "A220", "n": "Időjárás és évszakok", "s": 35}, {"c": "A221", "n": "Telefonálás", "s": 35}, {"c": "A222", "n": "Meghívás, programszervezés", "s": 35}, {"c": "A223", "n": "Terveim (going to, will)", "s": 35}, {"c": "A224", "n": "Emlékek, gyerekkor (used to)", "s": 35}, {"c": "A225", "n": "Összehasonlítás", "s": 35}, {"c": "A226", "n": "Tanácsok (should)", "s": 35}, {"c": "A227", "n": "Gondok utazás közben", "s": 35}, {"c": "A228", "n": "Bank és pénz", "s": 35}, {"c": "A229", "n": "Ünnepek", "s": 35}, {"c": "A230", "n": "Nyaralásaink", "s": 35}]}, {"lv": "B1", "f": "B1 · 1. Túlélés, ismerkedés", "ready": true, "i": [{"c": "TA", "n": "Ha nem ertek", "s": 40}, {"c": "TB", "n": "Hidak", "s": 40}, {"c": "T15", "n": "Bemutatkozas", "s": 40}, {"c": "01", "n": "Beszelgetes olaszokkal", "s": 80}, {"c": "03a", "n": "Etterem foglalas es rendeles", "s": 70}, {"c": "03b", "n": "Etterem allergia panasz fizetes", "s": 50}, {"c": "T29", "n": "Al bar", "s": 40}, {"c": "08c", "n": "Fagyizo es pizzaszelet", "s": 40}, {"c": "06a", "n": "Turista utbaigazitas", "s": 40}, {"c": "09b", "n": "Apartman erkezes", "s": 50}, {"c": "09c", "n": "Apartman problemak", "s": 40}, {"c": "07a", "n": "Utazas autopalya es benzinkut", "s": 50}, {"c": "07d", "n": "Utazas parkolas es ZTL", "s": 40}, {"c": "06d", "n": "Turista orvosnal es gyogyszertarban", "s": 50}]}, {"lv": "B1", "f": "B1 · 2. Magamról beszélek", "ready": true, "i": [{"c": "02", "n": "Egy napom", "s": 80}, {"c": "T16", "n": "A csaladom", "s": 40}, {"c": "T17", "n": "A munkam", "s": 40}, {"c": "T19", "n": "Ahol lakom", "s": 40}, {"c": "T20", "n": "Allataink", "s": 40}, {"c": "T24", "n": "Olaszorszagi nyaralasaink", "s": 40}, {"c": "T26", "n": "Terveink nyarra", "s": 40}, {"c": "T05", "n": "Helyiekkel", "s": 40}, {"c": "T09", "n": "Barati meghivas", "s": 40}, {"c": "T14", "n": "Velemeny es dontes", "s": 40}, {"c": "T36", "n": "Come mi sento", "s": 40}, {"c": "T18", "n": "Miert tanulok németül", "s": 40}, {"c": "T21", "n": "Magyar konyha", "s": 40}, {"c": "T23", "n": "Gyere Magyarorszagra", "s": 40}]}, {"lv": "B1", "f": "B1 · 3. Az egész utazás", "ready": true, "i": [{"c": "05", "n": "Tengerpart es strand", "s": 80}, {"c": "08a", "n": "Pekseg csemege gyumolcs", "s": 50}, {"c": "08b", "n": "Etteremben negyen", "s": 50}, {"c": "06b", "n": "Turista boltban es ajandekvasarlas", "s": 50}, {"c": "06c", "n": "Turista ruhavasarlas", "s": 30}, {"c": "06e", "n": "Turista muzeum es veszhelyzet", "s": 40}, {"c": "07b", "n": "Utazas piheno es repuloter", "s": 50}, {"c": "07c", "n": "Utazas busz vonat komp", "s": 40}, {"c": "07e", "n": "Utazas utkozbeni gondok", "s": 40}, {"c": "09a", "n": "Apartman foglalas", "s": 50}, {"c": "09d", "n": "Apartman kornyek es tavozas", "s": 40}, {"c": "10", "n": "Varatlan helyzetek", "s": 50}, {"c": "T30", "n": "Farmacia medico", "s": 40}, {"c": "T31", "n": "Autoberles", "s": 40}, {"c": "T32", "n": "In treno", "s": 40}, {"c": "T33", "n": "In albergo", "s": 40}, {"c": "T34", "n": "Banca bancomat", "s": 40}, {"c": "T01", "n": "Piac", "s": 40}, {"c": "T02", "n": "Vasarlas uzletekben", "s": 40}, {"c": "T04", "n": "Varosnezes", "s": 40}]}, {"lv": "B1", "f": "B1 · 4. Ráadás-témák", "ready": true, "i": [{"c": "04", "n": "Telefonalas es uzenetvaltas", "s": 80}, {"c": "T03", "n": "Kirandulas", "s": 40}, {"c": "T06", "n": "Napi program", "s": 40}, {"c": "T07", "n": "Muzeum", "s": 40}, {"c": "T08", "n": "Szabadido", "s": 40}, {"c": "T10", "n": "Autos kirandulas", "s": 40}, {"c": "T11", "n": "Fesztivalok", "s": 40}, {"c": "T12", "n": "Haz es kert", "s": 40}, {"c": "T13", "n": "Fozes otthon", "s": 40}, {"c": "T22", "n": "Magyar unnepek", "s": 40}, {"c": "T25", "n": "Gyerekkoromban", "s": 40}, {"c": "T27", "n": "Hetvegem", "s": 40}, {"c": "T28", "n": "Ha lehetne", "s": 40}, {"c": "T35", "n": "Tecnologia", "s": 40}]}, {"lv": "B2", "f": "B2 · 1. Vita, élmények, munka", "ready": true, "i": [{"c": "B01", "n": "Vita es erveles", "s": 40}, {"c": "B02", "n": "Hivatalos panasz", "s": 40}, {"c": "B03", "n": "Vita a szallasadoval", "s": 40}, {"c": "B04", "n": "Egy utazas elmesele", "s": 40}, {"c": "B05", "n": "Egy kellemetlen elmeny", "s": 40}, {"c": "B06", "n": "Hirek", "s": 40}, {"c": "B07", "n": "Tavmunka", "s": 40}, {"c": "B08", "n": "Technologia es MI", "s": 40}, {"c": "B09", "n": "Kornyezetvedelem", "s": 40}, {"c": "B10", "n": "Egeszseges eletmod", "s": 40}, {"c": "B11", "n": "Olasz magyar szokasok", "s": 40}, {"c": "B12", "n": "Regionalis konyha", "s": 40}, {"c": "B13", "n": "Borkostolo agriturismo", "s": 40}, {"c": "B14", "n": "Film konyv ajanlas", "s": 40}, {"c": "B15", "n": "Olasz zene", "s": 40}]}, {"lv": "B2", "f": "B2 · 2. Kultúra, élet, ügyintézés", "ready": true, "i": [{"c": "B16", "n": "Tortenelem kultura", "s": 40}, {"c": "B17", "n": "Generaciok", "s": 40}, {"c": "B18", "n": "Baratsag", "s": 40}, {"c": "B19", "n": "Nyelvtanulas felnottkent", "s": 40}, {"c": "B20", "n": "Auto szerviz biztosito", "s": 40}, {"c": "B21", "n": "Burokracia", "s": 40}, {"c": "B22", "n": "Haz Olaszorszagban", "s": 40}, {"c": "B23", "n": "Varos vagy videk", "s": 40}, {"c": "B24", "n": "Tomegturizmus", "s": 40}, {"c": "B25", "n": "Penz es sporolas", "s": 40}, {"c": "B26", "n": "Small talk es humor", "s": 40}, {"c": "B27", "n": "Almok es tervek", "s": 40}, {"c": "B28", "n": "Olasz unnepek", "s": 40}, {"c": "B29", "n": "Sport", "s": 40}, {"c": "B30", "n": "Ugyfelszolgalat telefonon", "s": 40}]}, {"lv": "C1", "f": "C1 · 1. Szakmai és közéleti nyelv", "ready": true, "i": [{"c": "C101", "n": "Arnyalt velemeny", "s": 40}, {"c": "C102", "n": "Targyalas es alkudozas", "s": 40}, {"c": "C103", "n": "Mernoki projekt", "s": 40}, {"c": "C104", "n": "Prezentacio tartasa", "s": 40}, {"c": "C105", "n": "Hivatalos levelek", "s": 40}, {"c": "C106", "n": "Fogyasztoi jogok", "s": 40}, {"c": "C107", "n": "Orvosi konzultacio", "s": 40}, {"c": "C108", "n": "Politika es kozelet", "s": 40}, {"c": "C109", "n": "Gazdasag es munkaeropiac", "s": 40}, {"c": "C110", "n": "Oktatasi rendszerek", "s": 40}, {"c": "C111", "n": "Bevandorlas es beilleszkedes", "s": 40}, {"c": "C112", "n": "Media es alhirek", "s": 40}, {"c": "C113", "n": "Tudomany es kutatas", "s": 40}]}, {"lv": "C1", "f": "C1 · 2. Kultúra és árnyalt kifejezés", "ready": true, "i": [{"c": "C114", "n": "Klimavaltozas", "s": 40}, {"c": "C115", "n": "Muveszet es epiteszet", "s": 40}, {"c": "C116", "n": "Német irodalmi klasszikusok", "s": 40}, {"c": "C117", "n": "Filmkritika", "s": 40}, {"c": "C118", "n": "Borok regiok slow food", "s": 40}, {"c": "C119", "n": "Ingatlanvasarlas", "s": 40}, {"c": "C120", "n": "Adok codice fiscale", "s": 40}, {"c": "C121", "n": "Konfliktuskezeles", "s": 40}, {"c": "C122", "n": "Erzelmek arnyaltan", "s": 40}, {"c": "C123", "n": "Szolasok es idiomak", "s": 40}, {"c": "C124", "n": "Tortenetmeseles mult idok", "s": 40}, {"c": "C125", "n": "Felteteles mondatok", "s": 40}]}, {"lv": "C2", "f": "C2 · Mesterszint", "ready": true, "i": [{"c": "C201", "n": "Retorika es meggyozes", "s": 40}, {"c": "C202", "n": "Ironia szarkazmus humor", "s": 40}, {"c": "C203", "n": "Akcentusok", "s": 40}, {"c": "C204", "n": "Filozofiai kerdesek", "s": 40}, {"c": "C205", "n": "Etika es MI", "s": 40}, {"c": "C206", "n": "Szerzodesek jogi nyelv", "s": 40}, {"c": "C207", "n": "Penzugy es befektetes", "s": 40}, {"c": "C208", "n": "Diplomaciai nyelv", "s": 40}, {"c": "C209", "n": "Irodalmi stilus", "s": 40}, {"c": "C210", "n": "Tortenelem melyebben", "s": 40}, {"c": "C211", "n": "Vallas es kultura", "s": 40}, {"c": "C212", "n": "Publicisztika sajtonyelv", "s": 40}, {"c": "C213", "n": "Tudomanyos ismeretterjesztes", "s": 40}, {"c": "C214", "n": "Szakmai vita mernoki", "s": 40}, {"c": "C215", "n": "Unnepi beszed poharkoszonto", "s": 40}, {"c": "C216", "n": "Reszvet es egyutterzes", "s": 40}, {"c": "C217", "n": "Halado targyalas", "s": 40}, {"c": "C218", "n": "Szleng fiatalos nyelv", "s": 40}, {"c": "C219", "n": "Hamis baratok arnyalatok", "s": 40}, {"c": "C220", "n": "Az eletem tortenete", "s": 40}]}];/*CURR_END*/
+/*CURR_START*/const CURRICULUM = [{"lv": "A1", "f": "A1 · 1. Első lépések", "ready": true, "i": [{"c": "A01", "n": "Hallo! Köszönés és bemutatkozás", "s": 30}, {"c": "A02", "n": "Nem értem – segítség a beszélgetésben", "s": 30}, {"c": "A03", "n": "Ich bin – ki vagyok", "s": 30}, {"c": "A04", "n": "Számok", "s": 30}, {"c": "A05", "n": "Kérdések", "s": 30}, {"c": "A06", "n": "Haben – van nekem", "s": 30}, {"c": "A07", "n": "A munkám – biológus vagyok", "s": 30}, {"c": "A08", "n": "Szeretem – zene, olvasás, séta", "s": 30}, {"c": "A09", "n": "Hány óra van? Napszakok", "s": 30}, {"c": "A10", "n": "Napok, hónapok, gyakoriság", "s": 30}, {"c": "A11", "n": "A kávézóban", "s": 30}, {"c": "A12", "n": "Nem – nicht és kein", "s": 30}]}, {"lv": "A1", "f": "A1 · 2. Az én világom", "ready": true, "i": [{"c": "A13", "n": "A családom", "s": 30}, {"c": "A14", "n": "Az otthonom", "s": 30}, {"c": "A15", "n": "A napirendem", "s": 30}, {"c": "A16", "n": "Étel és ital", "s": 30}, {"c": "A17", "n": "Vásárlás és árak", "s": 30}, {"c": "A18", "n": "Hol van? Útbaigazítás", "s": 30}, {"c": "A19", "n": "Vonattal, busszal", "s": 30}, {"c": "A20", "n": "Az időjárás", "s": 30}, {"c": "A21", "n": "Tudok, kell, akarok", "s": 30}, {"c": "A22", "n": "Szabadidő és hobbik", "s": 30}, {"c": "A23", "n": "Koncertre megyek", "s": 30}, {"c": "A24", "n": "Mit csináltam? (Perfekt)", "s": 30}, {"c": "A25", "n": "Terveim", "s": 30}]}, {"lv": "A2", "f": "A2 · 1. Hétköznapok és munka", "ready": true, "i": [{"c": "A201", "n": "Bemutatkozás bővebben", "s": 35}, {"c": "A202", "n": "A laborban", "s": 35}, {"c": "A203", "n": "Kollégák és megbeszélések", "s": 35}, {"c": "A204", "n": "E-mail és telefon", "s": 35}, {"c": "A205", "n": "Orvosnál", "s": 35}, {"c": "A206", "n": "Gyógyszertárban", "s": 35}, {"c": "A207", "n": "Bevásárlás és piac", "s": 35}, {"c": "A208", "n": "Étteremben", "s": 35}, {"c": "A209", "n": "Barátok, ismerkedés", "s": 35}, {"c": "A210", "n": "A hétvégém", "s": 35}, {"c": "A211", "n": "Ruhavásárlás", "s": 35}, {"c": "A212", "n": "Egészség, sport, séta", "s": 35}, {"c": "A213", "n": "Ünnepek", "s": 35}, {"c": "A214", "n": "Könyvek és olvasás", "s": 35}, {"c": "A215", "n": "Zene és kedvenc előadók", "s": 35}]}, {"lv": "A2", "f": "A2 · 2. Utazás és koncertek", "ready": true, "i": [{"c": "A216", "n": "Vonattal Németországban", "s": 35}, {"c": "A217", "n": "Szállás és szálloda", "s": 35}, {"c": "A218", "n": "Városnézés", "s": 35}, {"c": "A219", "n": "Koncertjegy vásárlása", "s": 35}, {"c": "A220", "n": "A koncerten", "s": 35}, {"c": "A221", "n": "Fesztivál", "s": 35}, {"c": "A222", "n": "Múzeumban", "s": 35}, {"c": "A223", "n": "Könyvesboltban", "s": 35}, {"c": "A224", "n": "Évszakok és időjárás", "s": 35}, {"c": "A225", "n": "Gondok utazás közben", "s": 35}, {"c": "A226", "n": "Programszervezés", "s": 35}, {"c": "A227", "n": "Emlékek (war, hatte)", "s": 35}, {"c": "A228", "n": "Összehasonlítás", "s": 35}, {"c": "A229", "n": "Tanácsok és javaslatok", "s": 35}, {"c": "A230", "n": "Nyaralásaim", "s": 35}]}, {"lv": "B1", "f": "B1 · 1. Beszélgetni tudok", "ready": true, "i": [{"c": "B101", "n": "Magamról részletesen", "s": 40}, {"c": "B102", "n": "Tanulmányaim", "s": 40}, {"c": "B103", "n": "A munkám részletesen", "s": 40}, {"c": "B104", "n": "Tudomány hétköznapi nyelven", "s": 40}, {"c": "B105", "n": "Véleményem van", "s": 40}, {"c": "B106", "n": "Egyetértés és vita", "s": 40}, {"c": "B107", "n": "Élmények mesélése", "s": 40}, {"c": "B108", "n": "Tervek és álmok", "s": 40}, {"c": "B109", "n": "Zene és érzések", "s": 40}, {"c": "B110", "n": "Könyvek és filmek", "s": 40}, {"c": "B111", "n": "Természet és környezet", "s": 40}, {"c": "B112", "n": "Egészséges élet", "s": 40}, {"c": "B113", "n": "Lakás és költözés", "s": 40}, {"c": "B114", "n": "Németország és Magyarország", "s": 40}, {"c": "B115", "n": "Váratlan helyzetek", "s": 40}]}, {"lv": "B1", "f": "B1 · 2. Nyelvvizsgára készülök", "ready": true, "i": [{"c": "B116", "n": "Vizsga: bemutatkozás", "s": 40}, {"c": "B117", "n": "Vizsga: képleírás", "s": 40}, {"c": "B118", "n": "Vizsga: közös tervezés", "s": 40}, {"c": "B119", "n": "Vizsga: témakifejtés", "s": 40}, {"c": "B120", "n": "Hivatalos levél", "s": 40}, {"c": "B121", "n": "Baráti levél", "s": 40}, {"c": "B122", "n": "Panasz és reklamáció", "s": 40}, {"c": "B123", "n": "Ügyintézés", "s": 40}, {"c": "B124", "n": "Munkahely és pályázat", "s": 40}, {"c": "B125", "n": "Média és internet", "s": 40}, {"c": "B126", "n": "Kultúra és hagyományok", "s": 40}, {"c": "B127", "n": "Utazás szervezése", "s": 40}, {"c": "B128", "n": "Érvelés", "s": 40}, {"c": "B129", "n": "Kötőszavak, mellékmondatok", "s": 40}, {"c": "B130", "n": "Vizsgaszituációk vegyesen", "s": 40}]}, {"lv": "B2", "f": "B2 · Magabiztosan", "ready": true, "i": [{"c": "B201", "n": "Árnyalt vélemény", "s": 40}, {"c": "B202", "n": "Tudományos kommunikáció", "s": 40}, {"c": "B203", "n": "Konferencián", "s": 40}, {"c": "B204", "n": "Prezentáció", "s": 40}, {"c": "B205", "n": "Állásinterjú", "s": 40}, {"c": "B206", "n": "Társadalmi kérdések", "s": 40}, {"c": "B207", "n": "Környezet és fenntarthatóság", "s": 40}, {"c": "B208", "n": "Egészségügy és gyógyszerek", "s": 40}, {"c": "B209", "n": "Zeneipar és koncertélet", "s": 40}, {"c": "B210", "n": "Irodalom", "s": 40}, {"c": "B211", "n": "Történetek mesélése", "s": 40}, {"c": "B212", "n": "Humor és szleng", "s": 40}, {"c": "B213", "n": "Telefonos ügyintézés", "s": 40}, {"c": "B214", "n": "Viták és kompromisszum", "s": 40}, {"c": "B215", "n": "Életem története", "s": 40}]}, {"lv": "C1", "f": "C1 · Szakmai és kulturális nyelv", "ready": true, "i": [{"c": "C101", "n": "Kutatás és módszertan", "s": 40}, {"c": "C102", "n": "Szakcikk összefoglalása", "s": 40}, {"c": "C103", "n": "Labor és biztonság", "s": 40}, {"c": "C104", "n": "Biotechnológia és etika", "s": 40}, {"c": "C105", "n": "Tárgyalás", "s": 40}, {"c": "C106", "n": "Közélet és politika", "s": 40}, {"c": "C107", "n": "Német irodalmi klasszikusok", "s": 40}, {"c": "C108", "n": "Zenetörténet", "s": 40}, {"c": "C109", "n": "Stílusrétegek", "s": 40}, {"c": "C110", "n": "Kifejezések és szólások", "s": 40}, {"c": "C111", "n": "Írásbeli érvelés", "s": 40}, {"c": "C112", "n": "Interjú és vita", "s": 40}]}, {"lv": "C2", "f": "C2 · Mesterszint", "ready": true, "i": [{"c": "C201", "n": "Tudományos előadás", "s": 40}, {"c": "C202", "n": "Árnyalt érvelés", "s": 40}, {"c": "C203", "n": "Irodalmi nyelv", "s": 40}, {"c": "C204", "n": "Dialektusok és regiszterek", "s": 40}, {"c": "C205", "n": "Szójátékok és humor", "s": 40}, {"c": "C206", "n": "Szakmai vita", "s": 40}, {"c": "C207", "n": "Kultúrák közötti kommunikáció", "s": 40}, {"c": "C208", "n": "Retorika", "s": 40}, {"c": "C209", "n": "Hamis barátok és árnyalatok", "s": 40}, {"c": "C210", "n": "Szabad beszélgetés bármiről", "s": 40}]}];/*CURR_END*/
 const PL_KEY = 'nemetsziget-plan', PL_DONE = 'nemetsziget-plandone';
 const PL_LEVELS = ['A0', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2'], PL_TARGET = { A0: 0, A1: 750, A2: 1700, B1: 2800, B2: 4000, C1: 5500, C2: 7500 };
 const PL_DEF = { level: 'A0', goal: 'A2', mode: 'time', date: '', days: '6', morning: 25, micro: 10, after: 10, evening: 35, read: false, speak: true, tutor: false, tutorDay: '3', first: 4.5, rev: 2.5, custom: [] };
@@ -2286,7 +2383,7 @@ function plClaudePrompt(kind) {
   const all = topics.join(' ').toLowerCase();
   const role = /tterem|pizz|bar|fagyi|cafe|kav/.test(all) ? 'egy német étterem pincére' : /apartman|szallo|albergo|hotel/.test(all) ? 'egy szálloda recepciósa' : /auto|benzin|parkol|ztl/.test(all) ? 'egy benzinkút dolgozója' : /orvos|gyogyszer|farmacia/.test(all) ? 'egy gyógyszerész' : /vasar|bolt|piac|pekseg/.test(all) ? 'egy bolti eladó' : 'egy barátságos német ismerős, akivel most találkozom';
   const lvl = plan.level === 'A0' ? 'kezdő' : plan.level + '–' + plan.goal;
-  const head = `Német nyelvet tanulok (szintem: ${lvl}). Magyar vagyok.`;
+  const head = `Német nyelvet tanulok (szintem: ${lvl}). Magyar vagyok, Panna, 26 éves biológus (molekuláris biológus, gyógyszer-biotechnológus), laborban dolgozom. Szeretek zenét hallgatni, olvasni és sétálni, és Németországba szeretnék utazni, koncertekre járni.`;
   const learned = topics.length ? `\nEzen a héten ezeket a témákat (nyelvi szigeteket) tanultam: ${topics.join('; ')}.` : '';
   const ex = pick.length ? `\nNéhány mondat, amit már tudok – ezekből és hasonlókból építkezz:\n${pick.join('\n')}` : '';
   if (kind === 'mono') return `${head}${learned}${ex}\n\nMa monológot gyakorlok. Adj egy témát a fenti témákból, és 3 segítő kérdést németül. Utána én 2 percig beszélek (beírom vagy lediktálom a szöveget). A végén javítsd ki a hibáimat, magyarázd el magyarul a 3 legfontosabbat, és írd le a javított változatot.`;
@@ -2387,7 +2484,7 @@ async function authAction(type) {
   if (!email || !password) { $('authStatus').textContent = 'Add meg az e-mail-címedet és a jelszavadat.'; return; }
   try {
     $('authStatus').textContent = 'Folyamatban…';
-    const r = type === 'signup' ? await client.auth.signUp({ email, password }) : await client.auth.signInWithPassword({ email, password });
+    const r = type === 'signup' ? await client.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname } }) : await client.auth.signInWithPassword({ email, password });
     if (r.error) throw r.error;
     if (type === 'signup' && !r.data.session) { $('authStatus').textContent = 'A fiók létrejött. Erősítsd meg az e-mail-címedet, majd jelentkezz be.'; return; }
     auth = r.data.session; setAuthUI();
@@ -2551,7 +2648,18 @@ $('hardPractice').onclick = async () => {
   if (!ok) $('hardStatus').textContent = 'Nincs nehéz mondat.';
 };
 $('load').onclick = () => loadFromFiles().catch(e => { $('status').textContent = e.message; });
-$('show').onclick = () => { stopHandsFree(); revealAnswer(true); };
+$('show').onclick = () => {
+  stopHandsFree();
+  if (sess && sess.rtPos !== sess.pos && !$('typeMode').checked && !$('dictMode').checked && sess.shownAt) { sess.rt = (Date.now() - sess.shownAt) / 1000; sess.rtPos = sess.pos; }
+  revealAnswer(true); if (sess && sess.rated) updateRateLabels();
+};
+function rateCtx() { const it = sess && sess.items[sess.pos]; return { rt: sess && sess.rtPos === sess.pos ? sess.rt : 0, it: it && it.it }; }
+function updateRateLabels() {
+  if (!sess || !sess.items[sess.pos]) return;
+  if (sess.practice) { document.querySelectorAll('[data-rate]').forEach(b => { b.querySelector('small').textContent = b.dataset.rate === 'again' ? 'újra előjön' : 'csak gyakorlás'; }); return; }
+  const it = sess.items[sess.pos], now = Date.now(), old = getProg(it.slug).cards[it.k], ctx = rateCtx();
+  document.querySelectorAll('[data-rate]').forEach(b => { b.querySelector('small').textContent = describeDue(schedule(old, b.dataset.rate, now, ctx).card, now); });
+}
 $('hideAnswer').onclick = () => { $('answrap').classList.add('hidden'); $('show').classList.remove('hidden'); };
 $('qAudio').onclick = () => play(qLang());
 $('aAudio').onclick = () => play(aLang(), $('hfRepeat').checked);
@@ -3312,9 +3420,28 @@ function makeBip() {
   return b;
 }
 const smooth = x => x * x * (3 - 2 * x);
+// Kiszámíthatatlan hullámzás: minden elhangzásnál véletlen irány, időpont, hossz és mozgásforma;
+// néha (kb. minden 6.) középen marad – de kétszer egymás után soha.
+let randPanLastNone = false;
+function randPan() {
+  const r = Math.random();
+  if (r < 0.17 && !randPanLastNone) { randPanLastNone = true; return null; }
+  randPanLastNone = false;
+  const side = (Math.random() < 0.5 ? -1 : 1) * (0.55 + Math.random() * 0.37);
+  const q = Math.random(), shape = q < 0.4 ? 'move' : q < 0.62 ? 'cross' : q < 0.82 ? 'from' : 'to';
+  const len = 0.25 + Math.random() * 0.35, start = Math.random() * Math.max(0.05, 1 - len);
+  return { type: 'rand', shape, side, start, len };
+}
 // Térbeli helyzet (–1 bal … +1 jobb) a mondat t (0–1) pontjában – a Sayback-program mozgását követi
 function panAt(spec, t) {
   if (!spec) return 0;
+  if (spec.type === 'rand') {
+    const S = spec.side, u = Math.max(0, Math.min(1, (t - spec.start) / spec.len));
+    if (spec.shape === 'move') { if (t < spec.start || t > spec.start + spec.len) return 0; return u < 0.4 ? S * smooth(u / 0.4) : u < 0.6 ? S : S * (1 - smooth((u - 0.6) / 0.4)); } // középről ki és vissza
+    if (spec.shape === 'cross') { if (t < spec.start || t > spec.start + spec.len) return 0; return u < 0.3 ? S * smooth(u / 0.3) : u < 0.7 ? S * (1 - 2 * smooth((u - 0.3) / 0.4)) : -S * (1 - smooth((u - 0.7) / 0.3)); } // egyik oldalról át a másikra
+    if (spec.shape === 'from') return S * (1 - smooth(u)); // oldalról indul, középre ér
+    return S * smooth(u); // 'to': középről elsodródik az egyik oldalra
+  }
   if (spec.type === 'move') { // közép → oldal → közép a mondat belsejében (27%-tól, 45% hosszan)
     if (t < 0.27 || t > 0.72) return 0;
     const u = (t - 0.27) / 0.45;
@@ -3480,7 +3607,7 @@ async function buildMix() {
       for (let r = 0; r < repsEff; r++) {
         // a hullámzás a német mondatot éri; elhangzásonként váltakozó oldalra
         const side = ((k + r) % 2 ? 1 : -1) * (waveSel === 'strong' ? 0.92 : Number(waveSel) || 0);
-        const itPan = !stereo ? null : waveSel === 'strong' ? { type: 'strong' } : { type: 'move', side };
+        const itPan = !stereo ? null : waveSel === 'random' ? randPan() : waveSel === 'strong' ? { type: 'strong' } : { type: 'move', side };
         segs.push({ x: q, pan: dir === 'hu-it' ? null : itPan }, pauseSeg(pause));
         if (r === 0) for (const part of chain) segs.push({ x: part, pan: null }, silenceSeg(part.length / MIX_RATE * 1.1 + 1.0));
         segs.push({ x: a, pan: dir === 'hu-it' ? itPan : null });
@@ -3635,6 +3762,21 @@ function setMixSession() {
   au.addEventListener('timeupdate', () => saveMixPos(false));
   au.addEventListener('loadedmetadata', updateMixPosState);
   $('mixBack15').onclick = () => seekMix(-15); $('mixFwd15').onclick = () => seekMix(15);
+  // nagy lejátszó
+  const fmt = t => { t = Math.max(0, Math.floor(t || 0)); const h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s2 = t % 60; return (h ? h + ':' + pad(m) : m) + ':' + pad(s2); };
+  const seek = $('bpSeek'); let dragging = false;
+  const paint = () => {
+    const d = isFinite(au.duration) ? au.duration : 0, c = au.currentTime || 0;
+    if (!dragging) seek.value = d ? Math.round(c / d * 1000) : 0;
+    seek.style.setProperty('--p', (seek.value / 10) + '%');
+    $('bpCur').textContent = fmt(dragging && d ? seek.value / 1000 * d : c); $('bpDur').textContent = fmt(d);
+    const playing = !au.paused && !au.ended; $('bpPlay').textContent = playing ? '⏸' : '▶'; $('bpPlay').setAttribute('aria-label', playing ? 'Szünet' : 'Lejátszás');
+  };
+  $('bpPlay').onclick = () => { if (au.paused || au.ended) au.play().catch(() => {}); else au.pause(); };
+  seek.addEventListener('input', () => { dragging = true; paint(); });
+  seek.addEventListener('change', () => { const d = au.duration; if (isFinite(d) && d) { try { au.currentTime = seek.value / 1000 * d; } catch {} } dragging = false; updateMixPosState(); paint(); });
+  ['play', 'pause', 'ended', 'timeupdate', 'loadedmetadata', 'durationchange', 'emptied', 'seeked'].forEach(e => au.addEventListener(e, paint));
+  paint();
 })();
 
 // ============================================================
@@ -3835,7 +3977,7 @@ function bvStep() {
   if (s === 4) {
     const chk = () => { nb.disabled = $('bvMn').value.trim().length < 3; }; $('bvMn').oninput = chk; chk();
     $('bvAskClaude').onclick = async () => {
-      const t = `Kulcsszó-módszerrel (hangzás-alapú emlékeztetővel) szeretném megjegyezni ezt: „${x.key || x.it}”.\nA mondat: ${x.it}\nMagyarul: ${x.hu}\nAdj 3 rövid, bizarr, vizuális emlékeztetőt magyarul: mindegyikben legyen egy hasonló hangzású magyar szó és egy kép, ami összeköti a jelentéssel.`;
+      const t = `Kulcsszó-módszerrel (hangzás-alapú emlékeztetővel) szeretném megjegyezni ezt: „${x.key || x.it}”.\nA mondat: ${x.it}\nMagyarul: ${x.hu}\nAdj 3 rövid, bizarr, vizuális emlékeztetőt magyarul: mindegyikben legyen egy hasonló hangzású magyar szó és egy kép, ami összeköti a jelentéssel. Panna vagyok, 26 éves biológus; szeretem a zenét, az olvasást és a sétát – ha lehet, ezekből építkezz.`;
       const ok = await bvCopy(t); $('bvVocInfo').textContent = ok ? 'A kérés a vágólapon van – illeszd be a Claude-nak, a választ írd vissza ide.' : 'Nem sikerült másolni.';
       try { window.open('https://claude.ai/new', '_blank'); } catch {}
     };
@@ -4265,17 +4407,19 @@ function bzParse(txt) {
 // ============================================================
 // BEVÉSÉSES TANULÁS – a szigetben: új mondat lépésenként + körkérdezés
 // ============================================================
-const DR_STEPS = () => ['Hallás + árnyékolás', 'Kezdőbetűkkel', 'Fejből'].concat($('drillWrite').checked ? ['Leírás'] : []).concat(['Értékelés']);
+const DR_STEPS = () => ['Hallás + árnyékolás', 'Kezdőbetűkkel', 'Fejből'].concat($('drillWrite').checked ? ['Leírás'] : []).concat(['Ellenőrzés + értékelés']);
 function drChips(cur) { return '<div class="bv-chips">' + DR_STEPS().map((s, i) => `<span class="${i < cur ? 'ok' : i === cur ? 'on' : ''}">${i + 1}. ${s}</span>`).join('') + '</div>'; }
 function drX(it) { return { slug: it.slug, n: it.n, hu: it.hu, it: it.it }; }
 function drillRender(it) {
   $('study').classList.add('drilling'); bvStopAudio();
-  try { stopActiveAudio(); } catch {}
+  try { stopActiveAudio(); } catch {} try { srStop(); } catch {}
+  document.querySelectorAll('#ratingArea .rate.suggest').forEach(b => b.classList.remove('suggest'));
   if (it.kor) return drillKor(it);
   const box = $('drillBox'), x = drX(it), s = it.dstep || 0, nNew = sess.items.filter(y => y.drill && !y.kor).length, iNew = sess.drilled.length + 1;
   const head = `<div class="bv-head"><b>📌 Bevéséses tanulás</b> · új mondat ${Math.min(iNew, nNew)} / ${nNew}</div>` + drChips(s)
     + (s < 3 ? `<label class="bv-chk muted" style="font-weight:600;margin:0 0 8px"><input type="checkbox" id="drWriteTgl"${$('drillWrite').checked ? ' checked' : ''}> ✍️ Leírás lépéssel (fejből leírod, amíg hibátlan nem lesz)</label>` : '');
-  const go = () => { it.dstep = s + 1; const last = $('drillWrite').checked ? 4 : 3; if (it.dstep >= last) drillDone(it); else drillRender(it); };
+  const L = $('drillWrite').checked ? 4 : 3; // az utolsó (ellenőrző) lépés sorszáma
+  const go = () => { it.dstep = Math.min(s + 1, L); drillRender(it); };
   const wt = () => { const t = $('drWriteTgl'); if (t) t.onchange = () => { $('drillWrite').checked = t.checked; saveSettings(); const c = box.querySelector('.bv-chips'); if (c) c.outerHTML = drChips(s); }; };
   if (s === 0) {
     box.innerHTML = head + `<h4>1. Hallás és árnyékolás</h4><div class="bv-q">${bzEsc(it.hu)}</div><div class="bv-a">${bzEsc(it.it)}</div>
@@ -4288,15 +4432,55 @@ function drillRender(it) {
   } else if (s === 1 || s === 2) {
     box.innerHTML = head + `<h4>${s + 1}. Előhívás ${s === 1 ? 'kezdőbetűkkel' : 'fejből'}</h4><div class="bv-q">${bzEsc(it.hu)}</div><p class="center muted">Mondd ki hangosan, és csak utána fedd fel.</p><div id="drRet"></div>`;
     bvRetrieve(x, go, $('drRet'), s === 1, s === 1 ? 'A kezdőbetűk segítenek:' : 'Most semmi segítség:'); wt();
-  } else {
+  } else if (s < L) {
     box.innerHTML = head + `<h4>4. Leírás fejből</h4><div class="bv-q">${bzEsc(it.hu)}</div><p class="center muted">Írd le fejből. Ha hibás, megmutatom a helyeset, és 5 mp múlva újra leírod – addig, amíg hibátlan nem lesz.</p><div id="drWr"></div><div class="center"><button id="drNext" disabled>Tovább →</button></div>`;
     bvWrite(x, $('drWr'), () => { $('drNext').disabled = false; }); $('drNext').onclick = go;
-  }
+  } else drillCheck(it, head, L);
 }
-function drillDone(it) {
+// Utolsó lépés: még egyszer fejből – KIMONDOD vagy LEÍROD –, az app összeveti, és csak utána értékelsz.
+function drillCheck(it, head, L) {
+  const box = $('drillBox');
+  box.innerHTML = head + `<h4>${L + 1}. Ellenőrzés és értékelés</h4><div class="bv-q">${bzEsc(it.hu)}</div>
+    <p class="center muted">Utoljára fejből, segítség nélkül: <b>mondd ki</b> vagy <b>írd le</b> – az app összeveti, és utána értékelsz.</p>
+    <div class="center">${SRClass ? '<button id="drSay">🎙️ Kimondom</button>' : ''}<button class="alt" id="drType">⌨️ Leírom</button></div>
+    <div id="drLive" class="sr-live"></div>
+    <div id="drTypeBox" class="hidden"><textarea class="vtype grow" rows="2" id="drTxt" placeholder="Írd le fejből…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></textarea><div class="center"><button id="drChk">Ellenőrzés</button></div></div>
+    <p class="center"><button class="alt" id="drSkip">Nem megy – mutasd a választ</button></p>`;
+  const lines = (r, who) => {
+    const row = (label, toks, states) => `<div><span class="muted">${label} </span>` + toks.map((t, k) => `<span class="w ${states[k]}">${bzEsc(t.raw)}</span>`).join(' ') + '</div>';
+    return `<div class="tres">${row('Helyesen:', r.E, r.eState)}${row(who, r.T, r.tState)}</div>`;
+  };
+  if ($('drSay')) $('drSay').onclick = async () => {
+    if (srActive) { srStop(); return; }
+    const b = $('drSay'); b.textContent = '⏹ Kész'; $('drLive').textContent = 'Hallgatlak… mondd ki a német mondatot.';
+    try {
+      const res = await srListen('it', t => { if ($('drLive')) $('drLive').textContent = '„' + t + '”'; });
+      const best = srCompare(it.it, res.text, res.alts);
+      drillDone(it, { pct: best.pct, how: 'kimondva', html: lines(best.r, 'Ezt értette a telefon:') + '<p class="muted">A felismerő néha félrehall – ha biztos vagy benne, hogy jól mondtad, értékelj aszerint.</p>' });
+    } catch (e) { if ($('drLive')) $('drLive').textContent = srErrText(e.code || e.message) + ' – próbáld újra, vagy írd le.'; if ($('drSay')) $('drSay').textContent = '🎙️ Kimondom'; }
+  };
+  $('drType').onclick = () => { $('drTypeBox').classList.remove('hidden'); $('drTxt').focus(); };
+  const check = () => {
+    const typed = $('drTxt').value; if (!typed.trim()) { $('drTxt').focus(); return; }
+    const r = compareAnswer(it.it, typed), ok = r.eState.filter(v => v !== 'miss').length, pct = Math.round(ok / Math.max(1, r.E.length, r.T.length) * 100);
+    drillDone(it, { pct, how: 'leírva', html: lines(r, 'Te írtad:') });
+  };
+  $('drChk').onclick = check;
+  $('drTxt').onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); check(); } };
+  $('drSkip').onclick = () => drillDone(it, { pct: 0, how: '', html: '<p>Most nem ment fejből – semmi baj, a „Nem ment” értékeléssel hamar újra előkerül.</p>' });
+}
+function drillDone(it, res) {
+  try { srStop(); } catch {}
   it.drillDone = true; sess.drilled.push(it); sess.sinceKor.push(it);
   $('study').classList.remove('drilling'); $('drillBox').innerHTML = '';
   render(); revealAnswer(false);
+  let sug = '';
+  if (res) {
+    sug = res.pct >= 95 ? 'good' : res.pct >= 70 ? 'hard' : 'again';
+    const name = { good: 'Jól ment', hard: 'Nehéz', again: 'Nem ment' }[sug];
+    $('drillBox').innerHTML = `<div class="dr-sum"><b>Az utolsó próba${res.how ? ' (' + res.how + ')' : ''}: ${res.pct}%</b>${res.html}<p class="muted" style="margin:6px 0 0">Javaslat: <b>${name}</b> – de te döntesz: ha csak egy apróság csúszott el, nyugodtan válassz jobbat; ha nagyon könnyen ment, a „Könnyű”-t.</p></div>`;
+  }
+  document.querySelectorAll('#ratingArea .rate').forEach(b => b.classList.toggle('suggest', !!sug && b.dataset.rate === sug));
   $('status').textContent = 'Most értékeld, mennyire ment fejből – ez alapján ütemezi az ismétlést. 3 új mondatonként rövid körkérdezés jön.';
 }
 function drillKor(it) {
